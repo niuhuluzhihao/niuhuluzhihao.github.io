@@ -20,11 +20,11 @@ tags:
 ## 安装LeetCode插件
 1、依次按照如下顺序进行点击settings-->Plugins-->LeetCode Editor，直接下载即可。
 
-[IDEA插件位置](../pict/插件存储位置.png) 
+![](https://github.com/niuhuluzhihao/picx-images-hosting/raw/master/插件存储位置.58har0oyir.webp)
 
 2、插件下载完成之后。依次点击settings-->Tools-->leetcode Plugine,配置对应的账号密码以及模板文件
 
-[leetcode配置](../pict/插件配置.png) 
+![](https://github.com/niuhuluzhihao/picx-images-hosting/raw/master/插件配置.2doml89jcz.webp)
 
 下面附上模板的结构：
 ```
@@ -63,4 +63,4 @@ $!velocityTool.date()	获取当前时间
 
 3、配置好之后就可以轻松实现leetcode进行debug啦。
 
-[debug过程](../pict/debug过程.png)
+![](https://github.com/niuhuluzhihao/picx-images-hosting/raw/master/debug过程.45m1qmxks.webp)
