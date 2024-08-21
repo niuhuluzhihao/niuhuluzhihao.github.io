@@ -20,7 +20,8 @@ tags:
 ## 安装LeetCode插件
 1、依次按照如下顺序进行点击settings-->Plugins-->LeetCode Editor，直接下载即可。
 
-![](https://github.com/niuhuluzhihao/picx-images-hosting/raw/master/插件存储位置.58har0oyir.webp)
+
+![](https://pic4.zhimg.com/80/v2-6caf0e597779eb690dffe71c0c610f54_720w.jpg?source=1940ef5c)
 
 「插件存储位置」
 
