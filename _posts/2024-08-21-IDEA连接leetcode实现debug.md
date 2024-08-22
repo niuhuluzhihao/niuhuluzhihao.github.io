@@ -21,7 +21,7 @@ tags:
 1、依次按照如下顺序进行点击settings-->Plugins-->LeetCode Editor，直接下载即可。
 
 
-![](https://pic4.zhimg.com/80/v2-6caf0e597779eb690dffe71c0c610f54_720w.jpg?source=1940ef5c)
+![](https://niuhuluzhihao.github.io/picx-images-hosting/插件存储位置.58har0oyir.webp)
 
 「插件存储位置」
 
