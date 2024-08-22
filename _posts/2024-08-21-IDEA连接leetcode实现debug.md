@@ -66,7 +66,7 @@ $!velocityTool.leftPadZeros(str,n)	在字符串的左边填充0，使字符串�
 $!velocityTool.date()	获取当前时间
 ```
 
-3、配置好之后就可以轻松实现leetcode进行debug啦。
+3、配置好之后就可以轻松实现leetcode进行debug了。
 
 ![](https://github.com/niuhuluzhihao/picx-images-hosting/raw/master/debug过程.45m1qmxks.webp)
 
