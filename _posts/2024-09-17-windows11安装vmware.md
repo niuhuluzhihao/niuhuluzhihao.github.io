@@ -5,7 +5,7 @@ author:     "NiuHuLu"
 header-style: text
 catalog:      true
 tags:
-  - 虛擬機
+  - 虚拟机
 ---
 
 
