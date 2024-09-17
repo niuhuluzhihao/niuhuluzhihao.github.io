@@ -1,7 +1,6 @@
 ---
 layout:     post
 title:      "如何使用VMWare安装ubuntu"
-date:       2024-09-12 23:10:00
 author:     "NiuHuLu"
 header-style: text
 catalog:      true
