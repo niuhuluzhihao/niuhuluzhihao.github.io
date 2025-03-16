@@ -1,14 +1,14 @@
 ---
-layout:       post
-title:        "IDEA中如何连接LeetCode（白嫖）"
-author:       "NiuHuLu"
+layout:     post
+title:      "IDEA中如何连接LeetCode（白嫖）"
+date:       2024-08-21 23:10:00
+author:     "NiuHuLu"
+catalog: false
+published: false
 header-style: text
-catalog:      true
 tags:
-    - Web
-    - JavaScript
+  - 前端
 ---
-
 
 # 引言
 >最近重新开始刷LeetCode,分享一下如何使用IDEA连接Leetcode并完成配置。

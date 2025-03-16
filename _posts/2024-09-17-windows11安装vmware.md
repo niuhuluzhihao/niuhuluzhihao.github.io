@@ -5,7 +5,7 @@ author:     "NiuHuLu"
 header-style: text
 catalog:      true
 tags:
-  - 虚拟机
+  - Linux
 ---
 
 
