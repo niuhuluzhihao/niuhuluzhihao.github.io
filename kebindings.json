@@ -1,0 +1,26 @@
+// 设置一级标题 (Ctrl+1)
+{
+	{
+		"key": "ctrl+1",
+		"command": "markdown.extension.editing.toggleHeading1",
+		"when": "editorTextFocus && editorLangId == 'markdown'"
+	},
+	// 设置二级标题 (Ctrl+2)
+	{
+		"key": "ctrl+2",
+		"command": "markdown.extension.editing.toggleHeading2",
+		"when": "editorTextFocus && editorLangId == 'markdown'"
+	},
+	// 提升标题级别 (Ctrl+↑)
+	{
+		"key": "ctrl+up",
+		"command": "markdown.extension.editing.toggleHeadingUp",
+		"when": "editorTextFocus && editorLangId == 'markdown'"
+	},
+	// 降低标题级别 (Ctrl+↓)
+	{
+		"key": "ctrl+down",
+		"command": "markdown.extension.editing.toggleHeadingDown",
+		"when": "editorTextFocus && editorLangId == 'markdown'"
+	}
+}
