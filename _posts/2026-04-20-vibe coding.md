@@ -206,7 +206,7 @@ claude plugin install document-skills@anthropic-agent-skills
 
 
 ### vscode中如何查看并配置plugins
-![image](./image/2026-04-20-vibecoding/image.png)
+![image](../pict/2026-04-20-vibecoding/image.png)
 
 
 ### 5.1 学习路径建议
