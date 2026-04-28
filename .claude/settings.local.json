@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+<<<<<<< Updated upstream
       "Bash(mkdir -p pict/2026-01-14-agents)",
       "Bash(cp -r \"_posts/image/2026-01-14-agents的理解与实践\"/* pict/2026-01-14-agents/)",
       "Bash(cp \"_posts/image/2026-01-14-agents的理解与实践\"/* pict/2026-01-14-agents/)",
@@ -10,6 +11,9 @@
       "Bash(cp \"_posts/image/2026-04-20-vibecoding\"/* pict/2026-04-20-vibecoding/)",
       "Bash(cp \"_posts/image/2025-08-13-文本评估\"/* pict/2025-08-13-文本评估/)",
       "WebFetch(domain:github.com)"
+=======
+      "Bash(claude help:*)"
+>>>>>>> Stashed changes
     ]
   }
 }
