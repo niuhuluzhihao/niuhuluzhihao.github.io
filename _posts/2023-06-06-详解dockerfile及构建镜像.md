@@ -825,7 +825,7 @@ $ docker build - < context.tar.gz
     docker load < tensorflow2.4.tar
     ```
 
-### 案例
+### 案例1
 
 ```dockerfile
 FROM public-docker-virtual.artnj.zte.com.cn/tensorflow/tensorflow:2.4.0
@@ -877,4 +877,61 @@ RUN python3 -m pip install ./zaip_api-0.1-py3-none-any.whl  && \
 
 # You can start the daemon by following method
 CMD env > /etc/environment && /usr/sbin/sshd -D
+```
+
+### 案例2
+```
+# 使用 Python 3.10 作为基础镜像
+FROM docker.m.daocloud.io/library/python:3.10-slim
+
+# 设置工作目录
+WORKDIR /app
+
+# 配置阿里云镜像源并安装 curl、ntpdate（用于时间同步）
+RUN rm -f /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources \
+    && echo "deb http://mirrors.aliyun.com/debian trixie main contrib non-free" > /etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian trixie-updates main contrib non-free" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian-security trixie-security main" >> /etc/apt/sources.list \
+    && apt-get update && apt-get install -y curl ntpsec-ntpdate vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# pip 换源安装 uv
+RUN pip install --no-cache-dir uv -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 复制依赖文件
+COPY pyproject.toml uv.lock ./
+
+# uv 安装依赖（使用清华源）
+RUN uv pip install --system --no-cache -r pyproject.toml \
+    --index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 复制应用代码
+COPY . .
+
+# 创建日志目录
+RUN mkdir -p logs
+
+
+# 暴露端口（使用环境变量 PORT 默认值 8006）
+EXPOSE ${PORT:-8001}
+
+# 设置时区为上海（Asia/Shanghai）
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# 时间同步配置 - 使用阿里云 NTP 服务器
+RUN echo '#!/bin/bash\n\
+# 启动前时间同步\n\
+echo "[INFO] 正在同步系统时间..."\n\
+ntpdate -u ntp.aliyun.com ntp1.aliyun.com ntp2.aliyun.com\n\
+# 启动应用\n\
+python api.py' > /app/start.sh \
+    && chmod +x /app/start.sh
+
+# 健康检查（检查应用是否运行，使用环境变量 PORT）
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${PORT:-8001}/health || exit 1
+
+# 启动命令 - 使用脚本启动以便同步时间
+CMD ["/app/start.sh"]
 ```
