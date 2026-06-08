@@ -1,8 +1,8 @@
 ---
-layout:     post
-title:      "IDEA中如何连接LeetCode（白嫖）"
-date:       2024-08-21 23:10:00
-author:     "NiuHuLu"
+layout: post
+title: "IDEA中如何连接LeetCode（白嫖）"
+date: 2024-08-21 23:10:00
+author: "NiuHuLu"
 catalog: false
 published: true
 header-style: text
@@ -20,7 +20,6 @@ tags:
 ## 安装LeetCode插件
 1、依次按照如下顺序进行点击settings-->Plugins-->LeetCode Editor，直接下载即可。
 
-
 ![](https://niuhuluzhihao.github.io/picx-images-hosting/插件存储位置.58har0oyir.webp)
 
 「插件存储位置」
@@ -36,7 +35,6 @@ tags:
 codeFileName :
 P${question.frontendQuestionId}$!velocityTool.camelCaseName(${question.titleSlug.trim()})
 ```
-
 
 ```
 code Template:
