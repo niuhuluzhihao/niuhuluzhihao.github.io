@@ -183,14 +183,17 @@ cc-switch中代理的配置的含义：cc-swith中的代理不等于翻墙的代
 └── config/          # 配置文件目录
 ```
 ### 常用插件
+
+```bash
 # 将此仓库添加为市场
 /plugin marketplace add https://github.com/affaan-m/everything-claude-code
 # 安装插件
 /plugin install everything-claude-code@everything-claude-code
-claude plugin install superpowers
+/plugin install superpowers
 
-claude plugin marketplace add anthropics/skills
-claude plugin install document-skills@anthropic-agent-skills
+/plugin marketplace add anthropics/skills
+/plugin install document-skills@anthropic-agent-skills
+```
 
 ## 5. 最佳实践与工作流
 ### 5.0 如何使用skills
