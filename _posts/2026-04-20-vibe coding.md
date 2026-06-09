@@ -187,10 +187,7 @@ cc-switch中代理的配置的含义：cc-swith中的代理不等于翻墙的代
 
 ### 常用插件
 
-<<<<<<< Updated upstream
 ```bash
-=======
->>>>>>> Stashed changes
 # 将此仓库添加为市场
 
 /plugin marketplace add https://github.com/affaan-m/everything-claude-code
@@ -200,13 +197,10 @@ cc-switch中代理的配置的含义：cc-swith中的代理不等于翻墙的代
 /plugin install everything-claude-code@everything-claude-code
 /plugin install superpowers
 
-<<<<<<< Updated upstream
 /plugin marketplace add anthropics/skills
 /plugin install document-skills@anthropic-agent-skills
 ```
 
-=======
->>>>>>> Stashed changes
 ## 5. 最佳实践与工作流
 
 ### 项目目录结构
@@ -256,11 +250,8 @@ claude --continue  --继续上一个回话，可以直接输入
 
 ### vscode中如何查看并配置plugins
 
-<<<<<<< Updated upstream
-=======
 ![image](../pict/2026-04-20-vibecoding/image.png)
 
->>>>>>> Stashed changes
 ### 5.1 学习路径建议
 
 1. **基础学习**: 从CS146S等课程建立理论基础
