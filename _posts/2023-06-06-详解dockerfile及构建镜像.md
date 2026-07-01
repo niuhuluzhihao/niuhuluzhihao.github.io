@@ -934,3 +934,398 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # 启动命令 - 使用脚本启动以便同步时间
 CMD ["/app/start.sh"]
 ```
+
+---
+
+## Docker 常用命令
+
+### 镜像相关命令
+
+| 命令 | 说明 |
+|------|------|
+| `docker images` 或 `docker image ls` | 列出本地所有镜像 |
+| `docker pull <镜像名>:<标签>` | 从镜像仓库拉取镜像，如 `docker pull nginx:latest` |
+| `docker push <镜像名>:<标签>` | 推送镜像到远程仓库 |
+| `docker build -t <镜像名>:<标签> <上下文路径>` | 通过 Dockerfile 构建镜像 |
+| `docker rmi <镜像ID或名称>` | 删除指定镜像，加 `-f` 强制删除 |
+| `docker image prune` | 清理悬空镜像（dangling images） |
+| `docker image prune -a` | 清理所有未被使用的镜像 |
+| `docker tag <源镜像> <新镜像>:<标签>` | 给镜像打标签 |
+| `docker save -o <文件名>.tar <镜像名>` | 将镜像保存为 tar 文件 |
+| `docker load -i <文件名>.tar` | 从 tar 文件加载镜像 |
+| `docker history <镜像名>` | 查看镜像的构建历史 |
+| `docker inspect <镜像名>` | 查看镜像的详细信息 |
+| `docker search <关键字>` | 在 Docker Hub 搜索镜像 |
+
+**常用示例：**
+
+```bash
+# 拉取镜像
+docker pull nginx:1.25
+
+# 构建镜像（-t 指定名称和标签，. 表示当前目录为上下文）
+docker build -t myapp:v1 .
+
+# 指定 Dockerfile 文件
+docker build -f Dockerfile.prod -t myapp:prod .
+
+# 导出镜像
+docker save -o nginx.tar nginx:1.25
+
+# 从 tar 加载镜像
+docker load -i nginx.tar
+
+# 删除所有悬空镜像
+docker image prune -f
+```
+
+---
+
+### 容器相关命令
+
+| 命令 | 说明 |
+|------|------|
+| `docker ps` | 列出正在运行的容器 |
+| `docker ps -a` | 列出所有容器（包括已停止的） |
+| `docker run [选项] <镜像>` | 创建并启动容器 |
+| `docker start <容器ID或名称>` | 启动已停止的容器 |
+| `docker stop <容器ID或名称>` | 停止运行中的容器 |
+| `docker restart <容器ID或名称>` | 重启容器 |
+| `docker pause / unpause <容器>` | 暂停 / 恢复容器 |
+| `docker rm <容器ID或名称>` | 删除已停止的容器，加 `-f` 强制删除运行中的 |
+| `docker container prune` | 清理所有已停止的容器 |
+| `docker exec -it <容器> <命令>` | 在运行中的容器内执行命令 |
+| `docker logs <容器>` | 查看容器日志 |
+| `docker logs -f <容器>` | 实时跟踪容器日志 |
+| `docker inspect <容器>` | 查看容器详细信息（JSON 格式） |
+| `docker stats` | 实时查看容器资源使用情况 |
+| `docker top <容器>` | 查看容器内运行的进程 |
+| `docker cp <宿主路径> <容器>:<容器路径>` | 宿主机与容器之间复制文件 |
+| `docker rename <旧名> <新名>` | 重命名容器 |
+| `docker commit <容器> <镜像名>:<标签>` | 将容器保存为新镜像 |
+
+**`docker run` 常用选项：**
+
+| 选项 | 说明 |
+|------|------|
+| `-d` | 后台运行容器（daemon 模式） |
+| `-it` | 交互模式 + 分配伪终端 |
+| `--name <名称>` | 指定容器名称 |
+| `-p <宿主端口>:<容器端口>` | 端口映射 |
+| `-P` | 随机映射 EXPOSE 声明的端口 |
+| `-v <宿主路径>:<容器路径>` | 挂载数据卷（绑定挂载） |
+| `-v <卷名>:<容器路径>` | 挂载命名卷 |
+| `--mount type=bind,source=...,target=...` | 更明确的挂载语法 |
+| `-e <KEY>=<VALUE>` | 设置环境变量 |
+| `--env-file <文件>` | 从文件加载环境变量 |
+| `--network <网络名>` | 指定容器使用的网络 |
+| `--restart <策略>` | 重启策略：`no`、`on-failure`、`always`、`unless-stopped` |
+| `--rm` | 容器停止后自动删除 |
+| `-w <目录>` | 指定容器内的工作目录 |
+| `-u <用户>` | 指定运行用户 |
+| `--cpus="1.5"` | 限制 CPU 使用 |
+| `-m 512m` | 限制内存 |
+| `--privileged` | 给予容器扩展权限 |
+
+**常用示例：**
+
+```bash
+# 后台运行 nginx，映射端口
+docker run -d --name web -p 8080:80 nginx:latest
+
+# 交互式进入 ubuntu 容器
+docker run -it --rm ubuntu:22.04 bash
+
+# 挂载本地目录并设置环境变量
+docker run -d --name app \
+    -p 8000:8000 \
+    -v /data/app:/app/data \
+    -e ENV=production \
+    --restart unless-stopped \
+    myapp:v1
+
+# 进入正在运行的容器
+docker exec -it web bash
+
+# 在容器中执行单条命令
+docker exec web nginx -t
+
+# 查看日志（最近 100 行并跟踪）
+docker logs -f --tail 100 web
+
+# 从容器复制文件到宿主机
+docker cp web:/etc/nginx/nginx.conf ./nginx.conf
+
+# 停止并删除所有容器
+docker stop $(docker ps -q)
+docker rm $(docker ps -aq)
+```
+
+---
+
+### 网络相关命令
+
+| 命令 | 说明 |
+|------|------|
+| `docker network ls` | 列出所有网络 |
+| `docker network create <网络名>` | 创建网络 |
+| `docker network inspect <网络名>` | 查看网络详细信息 |
+| `docker network connect <网络> <容器>` | 将容器连接到网络 |
+| `docker network disconnect <网络> <容器>` | 将容器从网络断开 |
+| `docker network rm <网络名>` | 删除网络 |
+| `docker network prune` | 清理未使用的网络 |
+
+**常用示例：**
+
+```bash
+# 创建一个 bridge 网络
+docker network create --driver bridge my-net
+
+# 创建容器时加入指定网络
+docker run -d --name db --network my-net postgres:15
+
+# 同一网络下的容器可以通过容器名互访
+docker run -d --name app --network my-net myapp:v1
+```
+
+---
+
+### 数据卷相关命令
+
+| 命令 | 说明 |
+|------|------|
+| `docker volume ls` | 列出所有数据卷 |
+| `docker volume create <卷名>` | 创建数据卷 |
+| `docker volume inspect <卷名>` | 查看数据卷详细信息 |
+| `docker volume rm <卷名>` | 删除数据卷 |
+| `docker volume prune` | 清理未被使用的数据卷 |
+
+**常用示例：**
+
+```bash
+# 创建命名卷
+docker volume create pgdata
+
+# 使用命名卷
+docker run -d --name pg \
+    -v pgdata:/var/lib/postgresql/data \
+    postgres:15
+```
+
+---
+
+### 系统与清理命令
+
+| 命令 | 说明 |
+|------|------|
+| `docker info` | 显示 Docker 系统信息 |
+| `docker version` | 显示 Docker 版本信息 |
+| `docker system df` | 查看磁盘使用情况 |
+| `docker system prune` | 清理停止的容器、未使用的网络、悬空镜像 |
+| `docker system prune -a --volumes` | 清理所有未使用的资源（含卷，谨慎使用） |
+| `docker login` | 登录镜像仓库 |
+| `docker logout` | 登出镜像仓库 |
+
+---
+
+## Docker Compose 常用命令
+
+Docker Compose 用于定义和运行多容器 Docker 应用，通过一个 `docker-compose.yml`（或 `compose.yaml`）文件即可管理整个应用栈。
+
+> **注意：** 新版本 Docker（Compose V2）使用 `docker compose`（空格分隔）代替旧版的 `docker-compose`（短横线）。两者命令基本一致，本文统一使用 V2 写法。
+
+### 核心命令
+
+| 命令 | 说明 |
+|------|------|
+| `docker compose up` | 创建并启动所有服务 |
+| `docker compose up -d` | 后台启动所有服务 |
+| `docker compose up --build` | 启动前重新构建镜像 |
+| `docker compose up -d <服务名>` | 启动指定服务 |
+| `docker compose down` | 停止并删除容器、网络（默认保留卷） |
+| `docker compose down -v` | 停止并删除容器、网络和卷 |
+| `docker compose down --rmi all` | 同时删除所有构建的镜像 |
+| `docker compose start` | 启动已存在的服务 |
+| `docker compose stop` | 停止服务（不删除容器） |
+| `docker compose restart` | 重启服务 |
+| `docker compose pause / unpause` | 暂停 / 恢复服务 |
+| `docker compose ps` | 查看服务运行状态 |
+| `docker compose ps -a` | 查看所有服务容器（包括已退出） |
+| `docker compose logs` | 查看所有服务日志 |
+| `docker compose logs -f <服务名>` | 实时跟踪指定服务日志 |
+| `docker compose logs --tail=100 -f` | 查看最近 100 行并跟踪 |
+| `docker compose exec <服务> <命令>` | 在运行中的服务容器内执行命令 |
+| `docker compose run --rm <服务> <命令>` | 启动一个临时容器执行命令 |
+| `docker compose build` | 构建（或重建）服务镜像 |
+| `docker compose build --no-cache` | 不使用缓存构建 |
+| `docker compose pull` | 拉取所有服务的镜像 |
+| `docker compose push` | 推送所有服务的镜像 |
+| `docker compose config` | 校验并显示最终配置 |
+| `docker compose top` | 查看服务进程 |
+| `docker compose rm` | 删除已停止的服务容器 |
+| `docker compose kill` | 强制杀掉服务容器 |
+| `docker compose scale <服务>=<数量>` | 扩容/缩容指定服务（旧用法，新版用 `--scale`） |
+| `docker compose up -d --scale web=3` | 启动并将 web 服务扩展为 3 个实例 |
+| `docker compose events` | 实时查看容器事件 |
+| `docker compose port <服务> <容器端口>` | 查看服务端口映射 |
+
+### 常用选项
+
+| 选项 | 说明 |
+|------|------|
+| `-f <文件>` | 指定 compose 文件，可多次使用合并多个文件 |
+| `-p <项目名>` | 指定项目名（默认使用目录名） |
+| `--env-file <文件>` | 指定环境变量文件（默认读取 `.env`） |
+| `--profile <名称>` | 启用指定 profile 中的服务 |
+
+### 常用示例
+
+```bash
+# 后台启动整个应用栈
+docker compose up -d
+
+# 重新构建并启动
+docker compose up -d --build
+
+# 仅启动指定服务（及其依赖）
+docker compose up -d web
+
+# 查看服务状态
+docker compose ps
+
+# 实时查看日志
+docker compose logs -f --tail=200
+
+# 进入服务容器
+docker compose exec web bash
+
+# 运行一次性命令（如数据库迁移）
+docker compose run --rm web python manage.py migrate
+
+# 停止并清理所有资源（保留数据卷）
+docker compose down
+
+# 完整清理（包括数据卷，谨慎使用）
+docker compose down -v --rmi local
+
+# 指定 compose 文件和项目名
+docker compose -f docker-compose.prod.yml -p myapp-prod up -d
+
+# 多文件合并（基础配置 + 覆盖配置）
+docker compose -f docker-compose.yml -f docker-compose.override.yml up -d
+
+# 扩容某个服务
+docker compose up -d --scale worker=5
+
+# 校验配置文件
+docker compose config
+```
+
+### Docker Compose 文件示例
+
+一个典型的 `docker-compose.yml` 文件：
+
+```yaml
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: myapp:latest
+    container_name: myapp-web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+      - DATABASE_URL=postgresql://user:pass@db:5432/mydb
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - app-data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app-net
+
+  db:
+    image: postgres:15
+    container_name: myapp-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d mydb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: myapp-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-net
+
+volumes:
+  pgdata:
+  redis-data:
+  app-data:
+
+networks:
+  app-net:
+    driver: bridge
+```
+
+### 常用工作流
+
+**开发环境：**
+
+```bash
+# 启动开发环境（带构建）
+docker compose up --build
+
+# 修改代码后只重启 web 服务
+docker compose restart web
+
+# 查看实时日志排查问题
+docker compose logs -f web
+```
+
+**生产环境部署：**
+
+```bash
+# 拉取最新镜像
+docker compose pull
+
+# 重新创建并启动（无停机滚动重启）
+docker compose up -d --remove-orphans
+
+# 查看资源占用
+docker stats $(docker compose ps -q)
+```
+
+**清理与维护：**
+
+```bash
+# 停止应用但保留数据
+docker compose stop
+
+# 删除应用相关的所有资源（含数据卷，慎用）
+docker compose down -v --remove-orphans
+
+# 系统级清理（清理整个 Docker 环境的悬空资源）
+docker system prune -f
+```
