@@ -11,7 +11,8 @@
       "Bash(cp \"_posts/image/2025-08-13-文本评估\"/* pict/2025-08-13-文本评估/)",
       "WebFetch(domain:github.com)",
       "Read(d:/code/**)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(powershell.exe -Command 'Get-Process node -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '\\\\''*niuhulu*'\\\\'' -or $_.CommandLine -like '\\\\''*vitepress*'\\\\'' } | Stop-Process -Force -ErrorAction SilentlyContinue; Get-CimInstance Win32_Process -Filter \"name='\\\\''node.exe'\\\\''\" | Where-Object { $_.CommandLine -like '\\\\''*vitepress dev*'\\\\'' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }')"
     ]
   }
 }

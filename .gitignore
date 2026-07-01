@@ -1,14 +1,9 @@
-_site
-_posts/_draft
-_posts/_archive
-_archive
 node_modules
+docs/.vitepress/dist
+docs/.vitepress/cache
 .vscode
 *.log
-*.lock
-*.sh
 .DS_Store
-.jekyll-cache
 */.DS_Store
 */*/.DS_Store
 CLAUDE.md

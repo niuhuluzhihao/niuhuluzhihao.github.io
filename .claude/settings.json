@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node format-posts.js)"
+      "Bash(node format-posts.js)",
+      "Bash(npm install *)",
+      "Bash(cp _posts/*.md docs/posts/ 2>/dev/null; echo \"Done copying posts\")",
+      "Bash(cp -r _posts/image docs/public/images)",
+      "Bash(cp -r pict docs/public/pict)",
+      "Bash(cp -r _posts/pdf docs/public/pdf)"
+    ],
+    "additionalDirectories": [
+      "D:\\code\\niuhuluzhihao.github.io\\_posts"
     ]
   }
 }
