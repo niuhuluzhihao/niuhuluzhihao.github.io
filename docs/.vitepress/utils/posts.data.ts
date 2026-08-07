@@ -16,6 +16,8 @@ export interface Post {
   title: string
   subtitle?: string
   date: string
+  /** 从文件名提取的日期（YYYY-MM-DD），作为 frontmatter 日期相同时的次级排序键 */
+  filenameDate: string
   author: string
   tags: string[]
   url: string
@@ -55,6 +57,7 @@ export default createContentLoader('posts/*.md', {
         title: item.frontmatter.title as string,
         subtitle: item.frontmatter.subtitle as string | undefined,
         date: (item.frontmatter.date as string) || extractDateFromPath(item.url),
+        filenameDate: extractDateFromPath(item.url),
         author: (item.frontmatter.author as string) || 'NiuHuLu',
         tags: ((item.frontmatter.tags as string[]) || [])
           .map(normalizeTag)
@@ -66,7 +69,14 @@ export default createContentLoader('posts/*.md', {
         published: item.frontmatter.published as boolean | undefined,
       }))
       .filter((p) => p.published !== false)
-      .sort((a, b) => (b.date > a.date ? 1 : -1))
+      .sort((a, b) => {
+        // 主排序键：frontmatter 日期降序
+        if (b.date !== a.date) return b.date > a.date ? 1 : -1
+        // 次排序键：frontmatter 日期相同时，按文件名日期降序
+        if (b.filenameDate !== a.filenameDate)
+          return b.filenameDate > a.filenameDate ? 1 : -1
+        return 0
+      })
 
     // 按年分组
     const yearMap = new Map<number, Post[]>()

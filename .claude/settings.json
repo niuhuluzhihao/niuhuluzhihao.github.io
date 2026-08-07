@@ -8,7 +8,11 @@
       "Bash(cp -r pict docs/public/pict)",
       "Bash(cp -r _posts/pdf docs/public/pdf)",
       "Bash(npm run *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(cd d:/code/niuhuluzhihao.github.io/docs/.vitepress/dist; echo \"=== 404.html 开头（看是否为 SPA 入口）===\"; head -c 1500 404.html; echo; echo \"=== deploy.yml 部署目标 ===\"; cat ../.github/workflows/deploy.yml 2>/dev/null | grep -E \"publish|artifact|branch|pages|dist\" | head)",
+      "Read(//d/code/.github/workflows/**)",
+      "Bash(git check-ignore *)",
+      "Bash(echo \"exit=$?\")"
     ],
     "additionalDirectories": [
       "D:\\code\\niuhuluzhihao.github.io\\_posts"
