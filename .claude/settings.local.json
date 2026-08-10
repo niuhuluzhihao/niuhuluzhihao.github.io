@@ -12,7 +12,13 @@
       "WebFetch(domain:github.com)",
       "Read(d:/code/**)",
       "Bash(git:*)",
-      "Bash(powershell.exe -Command 'Get-Process node -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '\\\\''*niuhulu*'\\\\'' -or $_.CommandLine -like '\\\\''*vitepress*'\\\\'' } | Stop-Process -Force -ErrorAction SilentlyContinue; Get-CimInstance Win32_Process -Filter \"name='\\\\''node.exe'\\\\''\" | Where-Object { $_.CommandLine -like '\\\\''*vitepress dev*'\\\\'' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }')"
+      "Bash(powershell.exe -Command 'Get-Process node -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '\\\\''*niuhulu*'\\\\'' -or $_.CommandLine -like '\\\\''*vitepress*'\\\\'' } | Stop-Process -Force -ErrorAction SilentlyContinue; Get-CimInstance Win32_Process -Filter \"name='\\\\''node.exe'\\\\''\" | Where-Object { $_.CommandLine -like '\\\\''*vitepress dev*'\\\\'' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }')",
+      "Bash(git rm *)",
+      "Bash(npm run *)",
+      "Bash(echo \"dev server 启动中，PID: $!\")",
+      "Bash(sleep 4 && cat /tmp/vitepress-dev.log 2>/dev/null | tail -20)",
+      "Read(//tmp/**)",
+      "Bash(curl -s \"http://localhost:5173/images/2026-04-28-minimind项目解读/dpo.png\")"
     ]
   }
 }

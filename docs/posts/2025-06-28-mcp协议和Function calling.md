@@ -11,12 +11,12 @@ tags:
 # Function calling
 函数调用是一种机制，它允许 LLM 根据用户的输入识别它需要什么工具以及何时调用它。Function calling主要通过SFT实现，而不是在预训练阶段从零开始训练。
 
-![functioning calling实现流程](/pict/functioning%20calling流程.jpg "functioning calling的流程")
+![functioning calling实现流程](./pict/functioning%20calling流程.jpg "functioning calling的流程")
 
 Function calling的发生过程在上图中**OpenAI服务器与GPT-4o**之间的关系
 
 # MCP协议
-![mcp实现流程](/pict/mcp流程.jpg )
+![mcp实现流程](./pict/mcp流程.jpg )
 MCP（即模型上下文协议,Model Context Protocol）试图标准化此过程。
 
 # Function calling和mcp的区别

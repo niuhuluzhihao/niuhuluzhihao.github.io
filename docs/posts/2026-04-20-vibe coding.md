@@ -205,7 +205,7 @@ cc-switch中代理的配置的含义：cc-swith中的代理不等于翻墙的代
 
 官方文档 https://code.claude.com/docs/zh-CN/claude-directory
 
-![1779935619716](/images/2026-04-20-vibecoding/1779935619716.png)
+![1779935619716](./images/2026-04-20-vibecoding/1779935619716.png)
 
 ```plaintext
 your-project/
@@ -248,7 +248,7 @@ claude --continue  --继续上一个回话，可以直接输入
 
 ### vscode中如何查看并配置plugins
 
-![image](/pict/2026-04-20-vibecoding/image.png)
+![image](./images/2026-04-20-vibecoding/image.png)
 
 ### 5.1 学习路径建议
 

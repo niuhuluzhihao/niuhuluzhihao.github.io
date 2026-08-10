@@ -10,7 +10,7 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     ['meta', { name: 'theme-color', content: '#000000' }],
     ['meta', { name: 'keywords', content: 'NiuHuLu, 四郎的博客, NiuHuLu Blog, 博客, 个人网站, 前端, Java, 大模型' }],
     ['meta', { property: 'og:site_name', content: 'NiuHuLu Blog' }],
